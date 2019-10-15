@@ -50,4 +50,4 @@ This list could be changed in `./dns.cnf` file.
 
 ## License
 
-- `Pric` is open-sourced software licensed under the [MIT license](LICENSE) by [Anton Komarev](https://komarev.com).
+- `pric` is open-sourced software licensed under the [MIT license](LICENSE) by [Anton Komarev](https://komarev.com).
