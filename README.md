@@ -4,8 +4,6 @@ Generate localhost development certificate in no time.
 
 ## Usage
 
-### Generate certificate
-
 Run `pric` command:
 
 ```sh
@@ -21,7 +19,7 @@ This command will:
 5. Generate localhost certificate signed by Certificate Authority in `./output/localhost.crt`
 6. Compile PEM file in `~/localhost-certificate.pem` (required for [Reverse proxy for PHP built-in server](https://github.com/mpyw/php-hyper-builtin-server))
 
-### Add certificate to browser
+### Import Certificate Authority to browser
 
 #### Firefox
 
