@@ -25,13 +25,16 @@ This command will:
 
 #### Firefox
 
-Go to `about:preferences` in address bar. Search for `Certificates` and click `View Cerficicates` button. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/pric/ca.crt` certificate.
+1. Go to `about:preferences` in address bar.
+2. Search for `Certificates` and click `View Cerficicates` button.
+3. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/pric/ca.crt` certificate.
 
 `!pric` Certificate Authority will be added to the list.
 
 #### Chromium (Chrome)
 
-Go to `chrome://settings/certificates` in address bar. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/pric/ca.crt` certificate.
+1. Go to `chrome://settings/certificates` in address bar.
+2. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/pric/ca.crt` certificate.
 
 `org-!pric` Certificate Authority will be added to the list.
 
