@@ -37,7 +37,13 @@ Go to `chrome://settings/certificates` in address bar. In `Authorities` tab clic
 
 ## Customization
 
-By default `pric` creates certificate for the following domain names: `localhost`, `test.localhost` & wildcard `*.test.localhost`. This list could be changed in `dns.cnf` file. 
+By default `pric` creates certificate for the following domain names:
+
+- `localhost`
+- `test.localhost`
+- `*.test.localhost` (wildcard)
+
+This list could be changed in `./dns.cnf` file. 
 
 ## License
 
