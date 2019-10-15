@@ -9,7 +9,7 @@ Generate localhost development certificate in no time.
 Run `pric` command:
 
 ```sh
-$ pric.sh
+$ ./pric.sh
 ```
 
 This command will:
