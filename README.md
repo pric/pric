@@ -44,7 +44,12 @@ By default `pric` creates certificate for the following domain names:
 - `test.localhost`
 - `*.test.localhost` (wildcard)
 
-This list could be changed in `./dns.cnf` file. 
+This list could be changed in `./dns.cnf` file.
+
+## Authors
+
+- [Anton Komarev](https://komarev.com)
+- [Dmitry Romanyuta](https://github.com/dumus)
 
 ## License
 
