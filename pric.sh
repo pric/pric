@@ -6,7 +6,7 @@ OPENSSL_CONFIG="openssl.cnf"
 OUTPUT_PATH="output"
 
 # Create output directory
-sudo mkdir -p ${OUTPUT_PATH}
+mkdir -p ${OUTPUT_PATH}
 
 # Create pric directory in Operating System CA registry
 sudo mkdir -p ${CA_PATH}
