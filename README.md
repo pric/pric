@@ -6,10 +6,10 @@ Generate localhost development certificate in no time.
 
 [Download pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file.
 
-In root pric directory execute `pric` command:
+In root pric directory execute `pric` terminal command:
 
 ```sh
-$ ./pric.sh
+$ sh pric.sh
 ```
 
 This command will:
