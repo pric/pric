@@ -4,7 +4,9 @@ Generate localhost development certificate in no time.
 
 ## Usage
 
-Run `pric` command:
+[Download pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file.
+
+In root pric directory execute `pric` command:
 
 ```sh
 $ ./pric.sh
