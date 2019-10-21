@@ -21,6 +21,8 @@ This command will:
 5. Generate localhost certificate signed by Certificate Authority in `./output/localhost.crt`
 6. Compile PEM file in `~/localhost-certificate.pem` (required for [Reverse proxy for PHP built-in server](https://github.com/mpyw/php-hyper-builtin-server))
 
+![pric output](https://user-images.githubusercontent.com/1849174/67169463-1f854000-f3b4-11e9-90ee-9ae48a0315eb.png)
+
 ### Import Certificate Authority to browser
 
 #### Firefox
