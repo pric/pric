@@ -48,6 +48,39 @@ By default `pric` creates certificate for the following domain names:
 
 This list could be changed in `./dns.cnf` file.
 
+## Verify Certificate Working
+
+Run web development server on 4000 port and try to access it via cURL:
+
+```sh
+$ curl -v https://localhost:4000
+
+* Rebuilt URL to: https://localhost:4000/
+*   Trying 127.0.0.1...
+* Connected to localhost (127.0.0.1) port 4000 (#0)
+* found 150 certificates in /etc/ssl/certs/ca-certificates.crt
+* found 602 certificates in /etc/ssl/certs
+* ALPN, offering http/1.1
+* SSL connection using TLS1.2 / ECDHE_RSA_AES_128_GCM_SHA256
+* 	 server certificate verification OK
+* 	 server certificate status verification SKIPPED
+* 	 common name: localhost (matched)
+* 	 server certificate expiration date OK
+* 	 server certificate activation date OK
+* 	 certificate public key: RSA
+* 	 certificate version: #3
+* 	 subject: O=!pric,CN=localhost
+* 	 start date: Mon, 21 Oct 2019 00:11:45 GMT
+* 	 expire date: Wed, 27 Sep 2119 00:11:45 GMT
+* 	 issuer: O=!pric,CN=localhost
+* 	 compression: NULL
+* ALPN, server did not agree to a protocol
+> GET / HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/7.47.0
+> Accept: */*
+```
+
 ## Authors
 
 - [Anton Komarev](https://komarev.com)
