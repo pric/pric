@@ -1,6 +1,6 @@
 # pric
 
-Generate localhost development certificate in no time.
+Generate private localhost development certificate in no time.
 
 ## Usage
 
