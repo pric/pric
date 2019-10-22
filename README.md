@@ -52,7 +52,7 @@ By default `pric` creates certificate for the following domain names:
 - `test.localhost`
 - `*.test.localhost` (wildcard)
 
-This list could be changed in `./dns.cnf` file.
+This list could be changed in `./openssl.dns.cnf` file. `pric` will create missing dns list file on start.
 
 ## Verify Certificate Working
 

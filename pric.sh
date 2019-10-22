@@ -19,6 +19,13 @@ printf "pric has been started\n"
 printf "\nCreating output directory\n"
 (set -x; mkdir -p ${OUTPUT_PATH})
 
+## Generate OpenSSL DNS config list if missing
+if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
+  ## Copying OpenSSL DNS config list from defaults
+  printf "\nCopying OpenSSL DNS config list from defaults\n"
+  (set -x; cp ${OPENSSL_DNS_DEFAULT_CONFIG} ${OPENSSL_DNS_CONFIG})
+fi
+
 # Create pric directory in Operating System CA registry
 printf "\nCreating pric directory in Operating System CA registry\n"
 (set -x; sudo mkdir -p ${CA_PATH})
@@ -64,13 +71,6 @@ fi
 ## Generate localhost private key
 printf "\nGenerating localhost private key\n"
 (set -x; openssl genrsa -out ${OUTPUT_SERVER_PRIVATE_KEY} 2048)
-
-## Generate OpenSSL DNS config list if not exists
-if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
-  ## Copying OpenSSL DNS config list from default
-  printf "\nCopying OpenSSL DNS config list from default\n"
-  (set -x; cp ${OPENSSL_DNS_DEFAULT_CONFIG} ${OPENSSL_DNS_CONFIG})
-fi
 
 ## Generate localhost certificate signing request
 printf "\nGenerating localhost certificate signing request\n"
