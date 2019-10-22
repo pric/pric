@@ -1,7 +1,8 @@
 CA_PATH="/usr/local/share/ca-certificates/!pric"
 CA_PRIVATE_KEY="${CA_PATH}/ca.key"
 CA_CERTIFICATE="${CA_PATH}/ca.crt"
-CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
+CA_CERTIFICATE_LIFETIME_DAYS=825
+SERVER_CERTIFICATE_LIFETIME_DAYS=825
 OPENSSL_BASE_CONFIG="./openssl.base.cnf"
 OPENSSL_BASE_CONFIG_DEFAULT="./openssl.base.default.cnf"
 OPENSSL_DNS_CONFIG="./openssl.dns.cnf"
@@ -14,6 +15,7 @@ OUTPUT_SERVER_PRIVATE_KEY="${OUTPUT_PATH}/localhost.key"
 OUTPUT_SERVER_CERTIFICATE="${OUTPUT_PATH}/localhost.crt"
 OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 OUTPUT_OPENSSL_CONFIG="${OUTPUT_PATH}/openssl.cnf"
+CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
 
 printf "!pric has been started\n"
 
@@ -72,7 +74,7 @@ fi
 if [ ! -f ${CA_CERTIFICATE} ]; then
   ## Generate Certificate Authority self-signed certificate
   printf "\n# Generating Certificate Authority self-signed certificate\n"
-  (set -x; openssl req -x509 -new -nodes -key ${OUTPUT_CA_PRIVATE_KEY} -sha256 -days 36500 -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_CA_CERTIFICATE})
+  (set -x; openssl req -x509 -new -nodes -key ${OUTPUT_CA_PRIVATE_KEY} -sha256 -days ${CA_CERTIFICATE_LIFETIME_DAYS} -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_CA_CERTIFICATE})
 
   ## Copy Certificate Authority certificate to Operating System CA registry
   printf "\n# Copying Certificate Authority certificate to Operating System CA registry\n"
@@ -99,7 +101,7 @@ printf "\n# Generating server certificate signing request\n"
 
 ## Generate server certificate signed by Certificate Authority
 printf "\n# Generating server certificate signed by Certificate Authority\n"
-(set -x; openssl x509 -req -extensions v3_req -extfile ${OUTPUT_OPENSSL_CONFIG} -in ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST} -CA ${CA_CERTIFICATE} -CAkey ${OUTPUT_CA_PRIVATE_KEY} -CAcreateserial -CAserial ${OUTPUT_CA_SERIAL_NUMBER} -days 36500 -sha256 -out ${OUTPUT_SERVER_CERTIFICATE})
+(set -x; openssl x509 -req -extensions v3_req -extfile ${OUTPUT_OPENSSL_CONFIG} -in ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST} -CA ${CA_CERTIFICATE} -CAkey ${OUTPUT_CA_PRIVATE_KEY} -CAcreateserial -CAserial ${OUTPUT_CA_SERIAL_NUMBER} -days ${SERVER_CERTIFICATE_LIFETIME_DAYS} -sha256 -out ${OUTPUT_SERVER_CERTIFICATE})
 
 # Optional
 
