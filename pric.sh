@@ -18,21 +18,21 @@ printf "!pric has been started\n"
 ## Determine if output directory is missing
 if [ ! -d ${OUTPUT_PATH} ]; then
   # Create output directory
-  printf "\nCreating output directory\n"
+  printf "\n# Creating output directory\n"
   (set -x; mkdir -p ${OUTPUT_PATH})
 fi
 
 ## Determine if OpenSSL DNS config list is missing
 if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
   ## Copying OpenSSL DNS config list from defaults
-  printf "\nCopying OpenSSL DNS config list from defaults\n"
+  printf "\n# Copying OpenSSL DNS config list from defaults\n"
   (set -x; cp ${OPENSSL_DNS_DEFAULT_CONFIG} ${OPENSSL_DNS_CONFIG})
 fi
 
 ## Determine if CA registry directory is missing
 if [ ! -d ${CA_PATH} ]; then
   # Create !pric directory in Operating System CA registry
-  printf "\nCreating !pric directory in Operating System CA registry\n"
+  printf "\n# Creating !pric directory in Operating System CA registry\n"
   (set -x; sudo mkdir -p ${CA_PATH})
 fi
 
@@ -41,51 +41,51 @@ fi
 ## Determine if CA private key file is missing
 if [ ! -f ${CA_CERTIFICATE} ]; then
   ## Generate Certificate Authority private key
-  printf "\nGenerating Certificate Authority private key\n"
+  printf "\n# Generating Certificate Authority private key\n"
   (set -x; openssl genrsa -out ${OUTPUT_CA_PRIVATE_KEY} 2048)
 
   ## Copy Certificate Authority private key to Operating System CA registry
-  printf "\nCopying Certificate Authority private key to Operating System CA registry\n"
+  printf "\n# Copying Certificate Authority private key to Operating System CA registry\n"
   (set -x; sudo cp ${OUTPUT_CA_PRIVATE_KEY} ${CA_PRIVATE_KEY})
 else
   ## Copy Certificate Authority private key from Operating System CA registry
-  printf "\nCopying Certificate Authority private key from Operating System CA registry\n"
+  printf "\n# Copying Certificate Authority private key from Operating System CA registry\n"
   (set -x; cp ${CA_PRIVATE_KEY} ${OUTPUT_CA_PRIVATE_KEY})
 fi
 
 ## Determine if CA certificate file is missing
 if [ ! -f ${CA_CERTIFICATE} ]; then
   ## Generate Certificate Authority self-signed certificate
-  printf "\nGenerating Certificate Authority self-signed certificate\n"
+  printf "\n# Generating Certificate Authority self-signed certificate\n"
   (set -x; openssl req -x509 -new -nodes -key ${OUTPUT_CA_PRIVATE_KEY} -sha256 -days 36500 -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_CA_CERTIFICATE})
 
   ## Copy Certificate Authority certificate to Operating System CA registry
-  printf "\nCopying Certificate Authority certificate to Operating System CA registry\n"
+  printf "\n# Copying Certificate Authority certificate to Operating System CA registry\n"
   (set -x; sudo cp ${OUTPUT_CA_CERTIFICATE} ${CA_CERTIFICATE})
 
   ## Update Operating System CA registry
-  printf "\nUpdating Operating System CA registry\n"
+  printf "\n# Updating Operating System CA registry\n"
   (set -x; sudo update-ca-certificates)
 else
   ## Copy Certificate Authority certificate from Operating System CA registry
-  printf "\nCopying Certificate Authority certificate from Operating System CA registry\n"
+  printf "\n# Copying Certificate Authority certificate from Operating System CA registry\n"
   (set -x; cp ${CA_CERTIFICATE} ${OUTPUT_CA_CERTIFICATE})
 fi
 
 # Local Server Certificate
 
 ## Generate localhost private key
-printf "\nGenerating localhost private key\n"
+printf "\n# Generating localhost private key\n"
 (set -x; openssl genrsa -out ${OUTPUT_SERVER_PRIVATE_KEY} 2048)
 
 ## Generate localhost certificate signing request
-printf "\nGenerating localhost certificate signing request\n"
+printf "\n# Generating localhost certificate signing request\n"
 (set -x; openssl req -new -key ${OUTPUT_SERVER_PRIVATE_KEY} -config ${OPENSSL_CONFIG} -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST})
 
 ## Generate localhost certificate signed by Certificate Authority
-printf "\nGenerating localhost certificate signed by Certificate Authority\n"
+printf "\n# Generating localhost certificate signed by Certificate Authority\n"
 (set -x; openssl x509 -req -extensions v3_req -extfile ${OPENSSL_CONFIG} -in ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST} -CA ${CA_CERTIFICATE} -CAkey ${OUTPUT_CA_PRIVATE_KEY} -CAcreateserial -CAserial ${OUTPUT_CA_SERIAL_NUMBER} -days 36500 -sha256 -out ${OUTPUT_SERVER_CERTIFICATE})
 
 ## Compile PEM certificate chain
-printf "\nCompiling PEM certificate chain\n"
+printf "\n# Compiling PEM certificate chain\n"
 (set -x; cat ${OUTPUT_SERVER_CERTIFICATE} ${CA_CERTIFICATE} ${OUTPUT_SERVER_PRIVATE_KEY} > "${CERTIFICATE_CHAIN}")
