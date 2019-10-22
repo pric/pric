@@ -15,24 +15,30 @@ OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 
 printf "pric has been started\n"
 
-# Create output directory
-printf "\nCreating output directory\n"
-(set -x; mkdir -p ${OUTPUT_PATH})
+## Determine if output directory is missing
+if [ ! -d ${OUTPUT_PATH} ]; then
+  # Create output directory
+  printf "\nCreating output directory\n"
+  (set -x; mkdir -p ${OUTPUT_PATH})
+fi
 
-## Generate OpenSSL DNS config list if missing
+## Determine if OpenSSL DNS config list is missing
 if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
   ## Copying OpenSSL DNS config list from defaults
   printf "\nCopying OpenSSL DNS config list from defaults\n"
   (set -x; cp ${OPENSSL_DNS_DEFAULT_CONFIG} ${OPENSSL_DNS_CONFIG})
 fi
 
-# Create pric directory in Operating System CA registry
-printf "\nCreating pric directory in Operating System CA registry\n"
-(set -x; sudo mkdir -p ${CA_PATH})
+## Determine if CA registry directory is missing
+if [ ! -d ${CA_PATH} ]; then
+  # Create pric directory in Operating System CA registry
+  printf "\nCreating pric directory in Operating System CA registry\n"
+  (set -x; sudo mkdir -p ${CA_PATH})
+fi
 
 # Certificate Authority Certificate
 
-## Generate CA private key if not exists
+## Determine if CA private key file is missing
 if [ ! -f ${CA_CERTIFICATE} ]; then
   ## Generate Certificate Authority private key
   printf "\nGenerating Certificate Authority private key\n"
@@ -47,7 +53,7 @@ else
   (set -x; cp ${CA_PRIVATE_KEY} ${OUTPUT_CA_PRIVATE_KEY})
 fi
 
-## Generate CA certificate if not exists
+## Determine if CA certificate file is missing
 if [ ! -f ${CA_CERTIFICATE} ]; then
   ## Generate Certificate Authority self-signed certificate
   printf "\nGenerating Certificate Authority self-signed certificate\n"
