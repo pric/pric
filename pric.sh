@@ -3,8 +3,9 @@ CA_PRIVATE_KEY="${CA_PATH}/ca.key"
 CA_CERTIFICATE="${CA_PATH}/ca.crt"
 CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
 OPENSSL_CONFIG="./openssl.cnf"
+OPENSSL_CONFIG_DEFAULT="./openssl.default.cnf"
 OPENSSL_DNS_CONFIG="./openssl.dns.cnf"
-OPENSSL_DNS_DEFAULT_CONFIG="./openssl.dns.default.cnf"
+OPENSSL_DNS_CONFIG_DEFAULT="./openssl.dns.default.cnf"
 OUTPUT_PATH="./output"
 OUTPUT_CA_PRIVATE_KEY="${OUTPUT_PATH}/ca.key"
 OUTPUT_CA_CERTIFICATE="${OUTPUT_PATH}/ca.crt"
@@ -15,23 +16,32 @@ OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 
 printf "!pric has been started\n"
 
+# Prepare directories & configuration files
+
 ## Determine if output directory is missing
 if [ ! -d ${OUTPUT_PATH} ]; then
-  # Create output directory
+  ## Create output directory
   printf "\n# Creating output directory\n"
   (set -x; mkdir -p ${OUTPUT_PATH})
+fi
+
+## Determine if OpenSSL config is missing
+if [ ! -f ${OPENSSL_CONFIG} ]; then
+  ## Copying OpenSSL config from defaults
+  printf "\n# Copying OpenSSL config from defaults\n"
+  (set -x; cp ${OPENSSL_CONFIG_DEFAULT} ${OPENSSL_CONFIG})
 fi
 
 ## Determine if OpenSSL DNS config list is missing
 if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
   ## Copying OpenSSL DNS config list from defaults
   printf "\n# Copying OpenSSL DNS config list from defaults\n"
-  (set -x; cp ${OPENSSL_DNS_DEFAULT_CONFIG} ${OPENSSL_DNS_CONFIG})
+  (set -x; cp ${OPENSSL_DNS_CONFIG_DEFAULT} ${OPENSSL_DNS_CONFIG})
 fi
 
 ## Determine if CA registry directory is missing
 if [ ! -d ${CA_PATH} ]; then
-  # Create !pric directory in Operating System CA registry
+  ## Create !pric directory in Operating System CA registry
   printf "\n# Creating !pric directory in Operating System CA registry\n"
   (set -x; sudo mkdir -p ${CA_PATH})
 fi
