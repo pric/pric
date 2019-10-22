@@ -2,7 +2,7 @@
 
 ![!pric](https://user-images.githubusercontent.com/1849174/67256070-f33df200-f48d-11e9-9cfc-33b1a979cf65.png)
 
-Generate private localhost development certificate in no time.
+Issue localhost development server certificate signed by own Private Certificate Authority in no time.
 
 ## Usage
 
