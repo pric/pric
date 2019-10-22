@@ -42,7 +42,7 @@ fi
 
 ## Compile OpenSSL final config from intermediates
 printf "\n# Compiling OpenSSL final config from intermediates\n"
-(set -x; cat ${OPENSSL_BASE_CONFIG} "\n\n" ${OPENSSL_DNS_CONFIG} > "${OUTPUT_OPENSSL_CONFIG}")
+(set -x; cat ${OPENSSL_BASE_CONFIG} ${OPENSSL_DNS_CONFIG} > "${OUTPUT_OPENSSL_CONFIG}")
 
 ## Determine if CA registry directory is missing
 if [ ! -d ${CA_PATH} ]; then
