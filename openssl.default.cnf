@@ -365,4 +365,4 @@ ess_cert_id_chain	= no	# Must the ESS cert id chain be included?
 
 ####################################################################
 
-.include ./openssl.dns.cnf
+.include openssl.dns.cnf
