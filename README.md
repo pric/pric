@@ -1,4 +1,4 @@
-# pric
+# !pric
 
 ![pric](https://user-images.githubusercontent.com/1849174/67252120-427a2780-f47a-11e9-928f-fd27a4f3f9d5.png)
 
