@@ -8,6 +8,10 @@ OPENSSL_DNS_DEFAULT_CONFIG="./dns.default.cnf"
 OUTPUT_PATH="./output"
 OUTPUT_CA_PRIVATE_KEY="${OUTPUT_PATH}/ca.key"
 OUTPUT_CA_CERTIFICATE="${OUTPUT_PATH}/ca.crt"
+OUTPUT_CA_SERIAL_NUMBER="${OUTPUT_PATH}/ca.srl"
+OUTPUT_SERVER_PRIVATE_KEY="${OUTPUT_PATH}/localhost.key"
+OUTPUT_SERVER_CERTIFICATE="${OUTPUT_PATH}/localhost.crt"
+OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 
 printf "pric has been started\n"
 
@@ -59,7 +63,7 @@ fi
 
 ## Generate localhost private key
 printf "\nGenerating localhost private key\n"
-(set -x; openssl genrsa -out ${OUTPUT_PATH}/localhost.key 2048)
+(set -x; openssl genrsa -out ${OUTPUT_SERVER_PRIVATE_KEY} 2048)
 
 ## Generate OpenSSL DNS config list if not exists
 if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
@@ -70,12 +74,12 @@ fi
 
 ## Generate localhost certificate signing request
 printf "\nGenerating localhost certificate signing request\n"
-(set -x; openssl req -new -key ${OUTPUT_PATH}/localhost.key -config ${OPENSSL_CONFIG} -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_PATH}/localhost.csr)
+(set -x; openssl req -new -key ${OUTPUT_SERVER_PRIVATE_KEY} -config ${OPENSSL_CONFIG} -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST})
 
 ## Generate localhost certificate signed by Certificate Authority
 printf "\nGenerating localhost certificate signed by Certificate Authority\n"
-(set -x; openssl x509 -req -extensions v3_req -extfile ${OPENSSL_CONFIG} -in ${OUTPUT_PATH}/localhost.csr -CA ${CA_CERTIFICATE} -CAkey ${OUTPUT_PATH}/ca.key -CAcreateserial -CAserial ${OUTPUT_PATH}/ca.srl -days 36500 -sha256 -out ${OUTPUT_PATH}/localhost.crt)
+(set -x; openssl x509 -req -extensions v3_req -extfile ${OPENSSL_CONFIG} -in ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST} -CA ${CA_CERTIFICATE} -CAkey ${OUTPUT_CA_PRIVATE_KEY} -CAcreateserial -CAserial ${OUTPUT_CA_SERIAL_NUMBER} -days 36500 -sha256 -out ${OUTPUT_SERVER_CERTIFICATE})
 
 ## Compile PEM certificate chain
 printf "\nCompiling PEM certificate chain\n"
-(set -x; cat ${OUTPUT_PATH}/localhost.crt ${CA_CERTIFICATE} ${OUTPUT_PATH}/localhost.key > "${CERTIFICATE_CHAIN}")
+(set -x; cat ${OUTPUT_SERVER_CERTIFICATE} ${CA_CERTIFICATE} ${OUTPUT_SERVER_PRIVATE_KEY} > "${CERTIFICATE_CHAIN}")
