@@ -17,7 +17,7 @@ OUTPUT_OPENSSL_CONFIG="${OUTPUT_PATH}/openssl.cnf"
 
 printf "!pric has been started\n"
 
-# Prepare directories & configuration files
+# Initialization
 
 ## Determine if output directory is missing
 if [ ! -d ${OUTPUT_PATH} ]; then
@@ -51,7 +51,7 @@ if [ ! -d ${CA_PATH} ]; then
   (set -x; sudo mkdir -p ${CA_PATH})
 fi
 
-# Certificate Authority Certificate
+# Certificate Authority
 
 ## Determine if CA private key file is missing
 if [ ! -f ${CA_CERTIFICATE} ]; then
@@ -87,19 +87,21 @@ else
   (set -x; cp ${CA_CERTIFICATE} ${OUTPUT_CA_CERTIFICATE})
 fi
 
-# Local Server Certificate
+# Server Certificate
 
-## Generate localhost private key
-printf "\n# Generating localhost private key\n"
+## Generate server private key
+printf "\n# Generating server private key\n"
 (set -x; openssl genrsa -out ${OUTPUT_SERVER_PRIVATE_KEY} 2048)
 
-## Generate localhost certificate signing request
-printf "\n# Generating localhost certificate signing request\n"
+## Generate server certificate signing request
+printf "\n# Generating server certificate signing request\n"
 (set -x; openssl req -new -key ${OUTPUT_SERVER_PRIVATE_KEY} -config ${OUTPUT_OPENSSL_CONFIG} -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST})
 
-## Generate localhost certificate signed by Certificate Authority
-printf "\n# Generating localhost certificate signed by Certificate Authority\n"
+## Generate server certificate signed by Certificate Authority
+printf "\n# Generating server certificate signed by Certificate Authority\n"
 (set -x; openssl x509 -req -extensions v3_req -extfile ${OUTPUT_OPENSSL_CONFIG} -in ${OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST} -CA ${CA_CERTIFICATE} -CAkey ${OUTPUT_CA_PRIVATE_KEY} -CAcreateserial -CAserial ${OUTPUT_CA_SERIAL_NUMBER} -days 36500 -sha256 -out ${OUTPUT_SERVER_CERTIFICATE})
+
+# Optional
 
 ## Compile PEM certificate chain
 printf "\n# Compiling PEM certificate chain\n"
