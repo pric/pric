@@ -1,14 +1,14 @@
 # !pric
 
-![pric](https://user-images.githubusercontent.com/1849174/67252120-427a2780-f47a-11e9-928f-fd27a4f3f9d5.png)
+![!pric](https://user-images.githubusercontent.com/1849174/67252120-427a2780-f47a-11e9-928f-fd27a4f3f9d5.png)
 
 Generate private localhost development certificate in no time.
 
 ## Usage
 
-[Download pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file.
+[Download !pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file.
 
-In root pric directory execute `pric` terminal command:
+In unzipped directory execute `pric.sh` terminal command:
 
 ```sh
 $ sh pric.sh
@@ -25,7 +25,7 @@ This command will:
 
 Terminal output:
 
-![pric output](https://user-images.githubusercontent.com/1849174/67169463-1f854000-f3b4-11e9-90ee-9ae48a0315eb.png)
+![!pric output](https://user-images.githubusercontent.com/1849174/67169463-1f854000-f3b4-11e9-90ee-9ae48a0315eb.png)
 
 ### Import Certificate Authority to browser
 
@@ -46,13 +46,13 @@ Terminal output:
 
 ## Customization
 
-By default `pric` creates certificate for the following domain names:
+By default `!pric` creates certificate for the following domain names:
 
 - `localhost`
 - `test.localhost`
 - `*.test.localhost` (wildcard)
 
-This list could be changed in `./openssl.dns.cnf` file (`pric` creates missing config file on start).
+This list could be changed in `./openssl.dns.cnf` file (`!pric` creates missing config file on start).
 
 ## Verify Certificate Working
 
@@ -94,4 +94,4 @@ $ curl -v https://localhost:4000
 
 ## License
 
-- `pric` is open-sourced software licensed under the [MIT license](LICENSE) by [Anton Komarev](https://komarev.com).
+- `!pric` is open-sourced software licensed under the [MIT license](LICENSE) by [Anton Komarev](https://komarev.com).

@@ -13,7 +13,7 @@ OUTPUT_SERVER_PRIVATE_KEY="${OUTPUT_PATH}/localhost.key"
 OUTPUT_SERVER_CERTIFICATE="${OUTPUT_PATH}/localhost.crt"
 OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 
-printf "pric has been started\n"
+printf "!pric has been started\n"
 
 ## Determine if output directory is missing
 if [ ! -d ${OUTPUT_PATH} ]; then
