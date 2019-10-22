@@ -95,3 +95,4 @@ $ curl -v https://localhost:4000
 ## License
 
 - `!pric` is open-sourced software licensed under the [MIT license](LICENSE) by [Anton Komarev](https://komarev.com).
+- `IT Specialist Help` image licensed under [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) by Gan Khoon Lay.
