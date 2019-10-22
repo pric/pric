@@ -2,7 +2,9 @@ CA_PATH="/usr/local/share/ca-certificates/pric"
 CA_PRIVATE_KEY="${CA_PATH}/ca.key"
 CA_CERTIFICATE="${CA_PATH}/ca.crt"
 CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
-OPENSSL_CONFIG="openssl.cnf"
+OPENSSL_CONFIG="./openssl.cnf"
+OPENSSL_DNS_CONFIG="./dns.cnf"
+OPENSSL_DNS_DEFAULT_CONFIG="./dns.default.cnf"
 OUTPUT_PATH="./output"
 OUTPUT_CA_PRIVATE_KEY="${OUTPUT_PATH}/ca.key"
 OUTPUT_CA_CERTIFICATE="${OUTPUT_PATH}/ca.crt"
@@ -58,6 +60,13 @@ fi
 ## Generate localhost private key
 printf "\nGenerating localhost private key\n"
 (set -x; openssl genrsa -out ${OUTPUT_PATH}/localhost.key 2048)
+
+## Generate OpenSSL DNS config list if not exists
+if [ ! -f ${OPENSSL_DNS_CONFIG} ]; then
+  ## Copying OpenSSL DNS config list from default
+  printf "\nCopying OpenSSL DNS config list from default\n"
+  (set -x; cp ${OPENSSL_DNS_DEFAULT_CONFIG} ${OPENSSL_DNS_CONFIG})
+fi
 
 ## Generate localhost certificate signing request
 printf "\nGenerating localhost certificate signing request\n"
