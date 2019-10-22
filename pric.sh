@@ -1,4 +1,4 @@
-CA_PATH="/usr/local/share/ca-certificates/pric"
+CA_PATH="/usr/local/share/ca-certificates/!pric"
 CA_PRIVATE_KEY="${CA_PATH}/ca.key"
 CA_CERTIFICATE="${CA_PATH}/ca.crt"
 CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
@@ -31,8 +31,8 @@ fi
 
 ## Determine if CA registry directory is missing
 if [ ! -d ${CA_PATH} ]; then
-  # Create pric directory in Operating System CA registry
-  printf "\nCreating pric directory in Operating System CA registry\n"
+  # Create !pric directory in Operating System CA registry
+  printf "\nCreating !pric directory in Operating System CA registry\n"
   (set -x; sudo mkdir -p ${CA_PATH})
 fi
 

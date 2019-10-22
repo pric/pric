@@ -16,8 +16,8 @@ $ sh pric.sh
 
 This command will:
 
-1. Generate Certificate Authority private key in `/usr/local/share/ca-certificates/pric/ca.key`
-2. Generate Certificate Authority self-signed certificate in `/usr/local/share/ca-certificates/pric/ca.crt`
+1. Generate Certificate Authority private key in `/usr/local/share/ca-certificates/!pric/ca.key`
+2. Generate Certificate Authority self-signed certificate in `/usr/local/share/ca-certificates/!pric/ca.crt`
 3. Generate localhost private key in `./output/localhost.key`
 4. Generate localhost certificate signing request in `./output/localhost.csr`
 5. Generate localhost certificate signed by Certificate Authority in `./output/localhost.crt`
@@ -33,14 +33,14 @@ Terminal output:
 
 1. Go to `about:preferences` in address bar.
 2. Search for `Certificates` and click `View Cerficicates` button.
-3. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/pric/ca.crt` certificate.
+3. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/!pric/ca.crt` certificate.
 
 `!pric` Certificate Authority will be added to the list.
 
 #### Chromium (Chrome)
 
 1. Go to `chrome://settings/certificates` in address bar.
-2. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/pric/ca.crt` certificate.
+2. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/!pric/ca.crt` certificate.
 
 `org-!pric` Certificate Authority will be added to the list.
 
