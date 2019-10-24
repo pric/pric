@@ -4,7 +4,7 @@
 
 Issue localhost development server certificates signed by own Private Certificate Authority in no time.
 
-**!pric is not a replacement for [Let's Encrypt](https://letsencrypt.org/). Use it only for development purposes!**
+**Use !pric only for development on local hosts. For public hosts consider using [Let's Encrypt](https://letsencrypt.org/)!**
 
 ## Introduction
 
