@@ -2,7 +2,16 @@
 
 ![!pric](https://user-images.githubusercontent.com/1849174/67256070-f33df200-f48d-11e9-9cfc-33b1a979cf65.png)
 
-Issue localhost development server certificate signed by own Private Certificate Authority in no time.
+Issue localhost development server certificates signed by own Private Certificate Authority in no time.
+
+**!pric is not a replacement for [Let's Encrypt](https://letsencrypt.org/). Use it only for development purposes!**
+
+## Introduction
+
+Self-signed certificates cause trust errors and issue locally-trusted development certificates signed by real
+Certificate Authority (CA) can be dangerous or even impossible for the hosts like `localhost`.
+
+!pric automatically creates and installs a local CA in the system root store, and generates locally-trusted certificates.
 
 ## Usage
 
