@@ -8,8 +8,8 @@ Issue localhost development server certificates signed by own Private Certificat
 
 ## Introduction
 
-Self-signed certificates cause trust errors and issue locally-trusted development certificates signed by real
-Certificate Authority (CA) can be dangerous or even impossible for the hosts like `localhost`.
+Self-signed certificates cause trust errors and issuing locally-trusted development certificates signed by a real
+Certificate Authority (CA) can be dangerous or even impossible for the hosts like `127.0.0.1` or `localhost`.
 
 !pric automatically creates and installs a local CA in the system root store, and generates locally-trusted certificates.
 
