@@ -1,6 +1,6 @@
 # !pric
 
-![!pric](https://user-images.githubusercontent.com/1849174/67256070-f33df200-f48d-11e9-9cfc-33b1a979cf65.png)
+![!pric](https://user-images.githubusercontent.com/1849174/72218137-b17e8e00-3548-11ea-8ab5-b59eda9d2149.png)
 
 Issue localhost development server certificates signed by own Private Certificate Authority in no time.
 
