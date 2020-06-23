@@ -93,11 +93,12 @@ case $OPERATION_SYSTEM in
     (set -x; sudo update-ca-certificates)
     ;;
   MacOS*)
-    sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${OUTPUT_CA_CERTIFICATE}
+    (set -x; sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${OUTPUT_CA_CERTIFICATE})
     ;;
   *)
-    echo "Unsupported OS: ${OPERATION_SYSTEM}"
-    echo "Create an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+${OPERATION_SYSTEM}+not+supported"
+    printf "\nUnsupported OS: ${OPERATION_SYSTEM}"
+    printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+${OPERATION_SYSTEM}+not+supported\n"
+    exit
 esac
 
 # Server Certificate
