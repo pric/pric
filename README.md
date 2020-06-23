@@ -15,7 +15,7 @@ Certificate Authority (CA) can be dangerous or even impossible for the hosts lik
 
 ## Usage
 
-[Download !pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file:
+[Download !pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip archive.
 
 Or just download and untar it with terminal command:
 
