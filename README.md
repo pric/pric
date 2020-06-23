@@ -15,11 +15,17 @@ Certificate Authority (CA) can be dangerous or even impossible for the hosts lik
 
 ## Usage
 
-[Download !pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file.
+[Download !pric sources](https://github.com/pric/pric/archive/master.zip) via browser and unzip file:
 
-In unzipped directory execute `pric.sh` terminal command:
+Or just download and untar it with terminal command:
 
-```sh
+```shell script
+$ wget -c https://github.com/pric/pric/archive/master.tar.gz -O - | tar -xz
+```
+
+Go to `pric-master` directory from the archive and execute `pric.sh` terminal command:
+
+```shell script
 $ sh pric.sh
 ```
 
@@ -67,7 +73,7 @@ This list could be changed in `./openssl.dns.cnf` file (`!pric` creates missing 
 
 Run web development server on 4000 port and try to access it via cURL:
 
-```sh
+```shell script
 $ curl -v https://localhost:4000
 
 * Rebuilt URL to: https://localhost:4000/
