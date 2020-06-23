@@ -16,7 +16,7 @@ OUTPUT_SERVER_CERTIFICATE="${OUTPUT_PATH}/localhost.crt"
 OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 OUTPUT_OPENSSL_CONFIG="${OUTPUT_PATH}/openssl.cnf"
 CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
-OPERATION_SYSTEM=$(uname -s)
+OPERATING_SYSTEM=$(uname -s)
 
 printf "!pric has been started\n"
 
@@ -88,16 +88,25 @@ fi
 
 ## Update operating system CA registry
 printf "\n# Updating operating system CA registry\n"
-case $OPERATION_SYSTEM in
+case $OPERATING_SYSTEM in
   Linux*)
-    (set -x; sudo update-ca-certificates)
+    if [ "$(command -v update-ca-certificates)" ]; then
+      (set -x; sudo update-ca-certificates)
+    elif [ "$(command -v update-ca-trust)" ]; then
+      (set -x; sudo update-ca-trust)
+    else
+      LINUX_DISTRIBUTIVE=$(head -1 /etc/os-release | sed -e "s/NAME=//g" | sed -e "s/\"//g" | sed -e "s/ /+/g")
+      printf "\nUnsupported Linux Distributive: %s" "${LINUX_DISTRIBUTIVE}"
+      printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=Linux+distributive+%s+not+supported\n" "${LINUX_DISTRIBUTIVE}"
+      exit
+    fi
     ;;
   Darwin*)
     (set -x; sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${OUTPUT_CA_CERTIFICATE})
     ;;
   *)
-    printf "\nUnsupported OS: ${OPERATION_SYSTEM}"
-    printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+${OPERATION_SYSTEM}+not+supported\n"
+    printf "\nUnsupported OS: %s" "${OPERATING_SYSTEM}"
+    printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+%s+not+supported\n" "${OPERATING_SYSTEM}"
     exit
 esac
 
