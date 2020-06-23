@@ -16,6 +16,7 @@ OUTPUT_SERVER_CERTIFICATE="${OUTPUT_PATH}/localhost.crt"
 OUTPUT_SERVER_CERTIFICATE_SIGNING_REQUEST="${OUTPUT_PATH}/localhost.csr"
 OUTPUT_OPENSSL_CONFIG="${OUTPUT_PATH}/openssl.cnf"
 CERTIFICATE_CHAIN="${HOME}/localhost-certificate.pem"
+OPERATION_SYSTEM=$(uname -s)
 
 printf "!pric has been started\n"
 
@@ -79,15 +80,26 @@ if [ ! -f ${CA_CERTIFICATE} ]; then
   ## Copy Certificate Authority certificate to Operating System CA registry
   printf "\n# Copying Certificate Authority certificate to Operating System CA registry\n"
   (set -x; sudo cp ${OUTPUT_CA_CERTIFICATE} ${CA_CERTIFICATE})
-
-  ## Update Operating System CA registry
-  printf "\n# Updating Operating System CA registry\n"
-  (set -x; sudo update-ca-certificates)
 else
   ## Copy Certificate Authority certificate from Operating System CA registry
   printf "\n# Copying Certificate Authority certificate from Operating System CA registry\n"
   (set -x; cp ${CA_CERTIFICATE} ${OUTPUT_CA_CERTIFICATE})
 fi
+
+## Update Operating System CA registry
+printf "\n# Updating Operating System CA registry\n"
+case $OPERATION_SYSTEM in
+  Linux*)
+    (set -x; sudo update-ca-certificates)
+    ;;
+  Darwin*)
+    (set -x; sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${OUTPUT_CA_CERTIFICATE})
+    ;;
+  *)
+    printf "\nUnsupported OS: ${OPERATION_SYSTEM}"
+    printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+${OPERATION_SYSTEM}+not+supported\n"
+    exit
+esac
 
 # Server Certificate
 
