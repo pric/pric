@@ -45,7 +45,8 @@ fi
 
 ## Compile OpenSSL final config from intermediates
 printf "\n# Compiling OpenSSL final config from intermediates\n"
-(set -x; cat ${OPENSSL_BASE_CONFIG} ${OPENSSL_DNS_CONFIG} > "${OUTPUT_OPENSSL_CONFIG}")
+echo "+ cat ${OPENSSL_BASE_CONFIG} ${OPENSSL_DNS_CONFIG} > \"${OUTPUT_OPENSSL_CONFIG}\""
+cat ${OPENSSL_BASE_CONFIG} ${OPENSSL_DNS_CONFIG} > "${OUTPUT_OPENSSL_CONFIG}"
 
 ## Determine if CA registry directory is missing
 if [ ! -d ${CA_PATH} ]; then
@@ -128,4 +129,5 @@ printf "\n# Generating server certificate signed by Certificate Authority\n"
 
 ## Compile PEM certificate chain
 printf "\n# Compiling PEM certificate chain\n"
-(set -x; cat ${OUTPUT_SERVER_CERTIFICATE} ${CA_CERTIFICATE} ${OUTPUT_SERVER_PRIVATE_KEY} > "${CERTIFICATE_CHAIN}")
+echo "+ cat ${OUTPUT_SERVER_CERTIFICATE} ${CA_CERTIFICATE} ${OUTPUT_SERVER_PRIVATE_KEY} > \"${CERTIFICATE_CHAIN}\""
+cat ${OUTPUT_SERVER_CERTIFICATE} ${CA_CERTIFICATE} ${OUTPUT_SERVER_PRIVATE_KEY} > "${CERTIFICATE_CHAIN}"
