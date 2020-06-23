@@ -33,7 +33,7 @@ This command will:
 
 1. Generate Certificate Authority private key in `/usr/local/share/ca-certificates/!pric/ca.key`
 2. Generate Certificate Authority self-signed certificate in `/usr/local/share/ca-certificates/!pric/ca.crt`
-3. Update Operating System Certificate Authority registry
+3. Update operating system Certificate Authority registry
 4. Generate localhost private key in `./output/localhost.key`
 5. Generate localhost certificate signing request in `./output/localhost.csr`
 6. Generate localhost certificate signed by Certificate Authority in `./output/localhost.crt`

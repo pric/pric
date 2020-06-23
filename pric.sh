@@ -49,8 +49,8 @@ printf "\n# Compiling OpenSSL final config from intermediates\n"
 
 ## Determine if CA registry directory is missing
 if [ ! -d ${CA_PATH} ]; then
-  ## Create !pric directory in Operating System CA registry
-  printf "\n# Creating !pric directory in Operating System CA registry\n"
+  ## Create !pric directory in operating system CA registry
+  printf "\n# Creating !pric directory in operating system CA registry\n"
   (set -x; sudo mkdir -p ${CA_PATH})
 fi
 
@@ -62,12 +62,12 @@ if [ ! -f ${CA_PRIVATE_KEY} ]; then
   printf "\n# Generating Certificate Authority private key\n"
   (set -x; openssl genrsa -out ${OUTPUT_CA_PRIVATE_KEY} 2048)
 
-  ## Copy Certificate Authority private key to Operating System CA registry
-  printf "\n# Copying Certificate Authority private key to Operating System CA registry\n"
+  ## Copy Certificate Authority private key to operating system CA registry
+  printf "\n# Copying Certificate Authority private key to operating system CA registry\n"
   (set -x; sudo cp ${OUTPUT_CA_PRIVATE_KEY} ${CA_PRIVATE_KEY})
 else
-  ## Copy Certificate Authority private key from Operating System CA registry
-  printf "\n# Copying Certificate Authority private key from Operating System CA registry\n"
+  ## Copy Certificate Authority private key from operating system CA registry
+  printf "\n# Copying Certificate Authority private key from operating system CA registry\n"
   (set -x; cp ${CA_PRIVATE_KEY} ${OUTPUT_CA_PRIVATE_KEY})
 fi
 
@@ -77,17 +77,17 @@ if [ ! -f ${CA_CERTIFICATE} ]; then
   printf "\n# Generating Certificate Authority self-signed certificate\n"
   (set -x; openssl req -x509 -new -nodes -key ${OUTPUT_CA_PRIVATE_KEY} -sha256 -days ${CA_CERTIFICATE_LIFETIME_DAYS} -subj "/O=\!pric/CN=localhost" -out ${OUTPUT_CA_CERTIFICATE})
 
-  ## Copy Certificate Authority certificate to Operating System CA registry
-  printf "\n# Copying Certificate Authority certificate to Operating System CA registry\n"
+  ## Copy Certificate Authority certificate to operating system CA registry
+  printf "\n# Copying Certificate Authority certificate to operating system CA registry\n"
   (set -x; sudo cp ${OUTPUT_CA_CERTIFICATE} ${CA_CERTIFICATE})
 else
-  ## Copy Certificate Authority certificate from Operating System CA registry
-  printf "\n# Copying Certificate Authority certificate from Operating System CA registry\n"
+  ## Copy Certificate Authority certificate from operating system CA registry
+  printf "\n# Copying Certificate Authority certificate from operating system CA registry\n"
   (set -x; cp ${CA_CERTIFICATE} ${OUTPUT_CA_CERTIFICATE})
 fi
 
-## Update Operating System CA registry
-printf "\n# Updating Operating System CA registry\n"
+## Update operating system CA registry
+printf "\n# Updating operating system CA registry\n"
 case $OPERATION_SYSTEM in
   Linux*)
     (set -x; sudo update-ca-certificates)
