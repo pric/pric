@@ -56,7 +56,7 @@ fi
 # Certificate Authority
 
 ## Determine if CA private key file is missing
-if [ ! -f ${CA_CERTIFICATE} ]; then
+if [ ! -f ${CA_PRIVATE_KEY} ]; then
   ## Generate Certificate Authority private key
   printf "\n# Generating Certificate Authority private key\n"
   (set -x; openssl genrsa -out ${OUTPUT_CA_PRIVATE_KEY} 2048)
