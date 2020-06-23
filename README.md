@@ -41,7 +41,7 @@ This command will:
 
 Terminal output:
 
-![!pric output](https://user-images.githubusercontent.com/1849174/67256373-5419fa00-f48f-11e9-884c-2a3cbe97bd73.png)
+![!pric output](https://user-images.githubusercontent.com/1849174/85476736-974ddf00-b5c1-11ea-8ae8-7ca24f88b7a8.png)
 
 ### Tested on
 
