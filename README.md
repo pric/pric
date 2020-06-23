@@ -43,6 +43,12 @@ Terminal output:
 
 ![!pric output](https://user-images.githubusercontent.com/1849174/67256373-5419fa00-f48f-11e9-884c-2a3cbe97bd73.png)
 
+### Tested on
+
+- Ubuntu
+- CentOS
+- macOS
+
 ### Import Certificate Authority to browser
 
 #### Firefox
