@@ -20,13 +20,13 @@ Certificate Authority (CA) can be dangerous or even impossible for the hosts lik
 Or just download and untar it with terminal command:
 
 ```shell script
-$ wget -c https://github.com/pric/pric/archive/master.tar.gz -O - | tar -xz
+wget -c https://github.com/pric/pric/archive/master.tar.gz -O - | tar -xz
 ```
 
 Go to the extracted `pric-master` directory and execute `pric.sh` terminal command:
 
 ```shell script
-$ sh pric.sh
+sh pric.sh
 ```
 
 This command will:
