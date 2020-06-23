@@ -90,14 +90,14 @@ fi
 printf "\n# Updating operating system CA registry\n"
 case $OPERATING_SYSTEM in
   Linux*)
-    if [ $(command -v update-ca-certificates) ]; then
+    if [ "$(command -v update-ca-certificates)" ]; then
       (set -x; sudo update-ca-certificates)
-    elif [ $(command -v update-ca-trust) ]; then
+    elif [ "$(command -v update-ca-trust)" ]; then
       (set -x; sudo update-ca-trust)
     else
       LINUX_DISTRIBUTIVE=$(head -1 /etc/os-release | sed -e "s/NAME=//g" | sed -e "s/\"//g" | sed -e "s/ /+/g")
-      printf "\nUnsupported Linux Distributive: ${LINUX_DISTRIBUTIVE}"
-      printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=Linux+distributive+${LINUX_DISTRIBUTIVE}+not+supported\n"
+      printf "\nUnsupported Linux Distributive: %s" "${LINUX_DISTRIBUTIVE}"
+      printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=Linux+distributive+%s+not+supported\n" "${LINUX_DISTRIBUTIVE}"
       exit
     fi
     ;;
@@ -105,8 +105,8 @@ case $OPERATING_SYSTEM in
     (set -x; sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${OUTPUT_CA_CERTIFICATE})
     ;;
   *)
-    printf "\nUnsupported OS: ${OPERATING_SYSTEM}"
-    printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+${OPERATING_SYSTEM}+not+supported\n"
+    printf "\nUnsupported OS: %s" "${OPERATING_SYSTEM}"
+    printf "\nCreate an issue on GitHub https://github.com/pric/pric/issues/new?title=OS+%s+not+supported\n" "${OPERATING_SYSTEM}"
     exit
 esac
 
