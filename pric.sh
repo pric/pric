@@ -92,7 +92,7 @@ case $OPERATION_SYSTEM in
   Linux*)
     (set -x; sudo update-ca-certificates)
     ;;
-  MacOS*)
+  Darwin*)
     (set -x; sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ${OUTPUT_CA_CERTIFICATE})
     ;;
   *)
