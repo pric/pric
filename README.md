@@ -23,7 +23,7 @@ Or just download and untar it with terminal command:
 $ wget -c https://github.com/pric/pric/archive/master.tar.gz -O - | tar -xz
 ```
 
-Go to `pric-master` directory from the archive and execute `pric.sh` terminal command:
+Go to the extracted `pric-master` directory and execute `pric.sh` terminal command:
 
 ```shell script
 $ sh pric.sh
