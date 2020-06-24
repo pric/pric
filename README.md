@@ -43,12 +43,6 @@ Terminal output:
 
 ![!pric output](https://user-images.githubusercontent.com/1849174/85476736-974ddf00-b5c1-11ea-8ae8-7ca24f88b7a8.png)
 
-### Tested on
-
-- Ubuntu
-- CentOS
-- macOS
-
 ### Import Certificate Authority to browser
 
 #### Firefox
@@ -65,6 +59,13 @@ Terminal output:
 2. In `Authorities` tab click `Import` and choose `/usr/local/share/ca-certificates/!pric/ca.crt` certificate.
 
 `org-!pric` Certificate Authority will be added to the list.
+
+## Supported root stores
+
+- macOS system store
+- Linux system store
+    - update-ca-trust (RHEL, CentOS, Fedora) or
+    - update-ca-certificates (Ubuntu, Debian, OpenSUSE, SLES)
 
 ## Customization
 
